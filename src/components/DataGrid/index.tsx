@@ -23,12 +23,14 @@ interface DataGridProps {
   headers: Array<string>;
   data: Array<Data>;
   onDataClick: Function;
+  setSelectedData: Function;
 }
 
 const DataGrid: React.FC<DataGridProps> = ({
   headers,
   data,
-  onDataClick
+  onDataClick,
+  setSelectedData,
 }: DataGridProps) => (
   <>
     <GridHeaderContainer>
@@ -48,10 +50,22 @@ const DataGrid: React.FC<DataGridProps> = ({
         <>
           <GridRow key={d.email}>
             <Checkbox />
-            <GridCell clickable={true} onClick={() => onDataClick()}>
+            <GridCell
+              clickable={true}
+              onClick={() => {
+                onDataClick();
+                setSelectedData(d);
+              }}
+            >
               <Avatar>{d.name[0]}</Avatar> <StyledName>{d.name}</StyledName>
             </GridCell>
-            <GridCell clickable={true} onClick={() => onDataClick()}>
+            <GridCell
+              clickable={true}
+              onClick={() => {
+                onDataClick();
+                setSelectedData(d);
+              }}
+            >
               {d.email}
             </GridCell>
             <GridCell>{d.phoneNumber}</GridCell>

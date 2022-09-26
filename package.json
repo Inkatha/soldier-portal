@@ -6,6 +6,7 @@
     "@auth0/auth0-react": "^1.10.2",
     "@emotion/react": "^11.10.0",
     "@fontsource/roboto": "^4.5.8",
+    "@fontsource/roboto-condensed": "^4.5.9",
     "@mui/icons-material": "^5.10.3",
     "@mui/material": "^5.10.0",
     "@testing-library/jest-dom": "^5.16.5",
