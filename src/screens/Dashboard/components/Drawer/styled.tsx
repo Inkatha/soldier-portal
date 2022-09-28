@@ -77,7 +77,7 @@ export const TabHeader = styled("div")`
 `;
 
 export const TabContentContainer = styled("div")`
-  height: 70%;
+  height: auto;
   border: 1px solid #c7c7c7;
   border-radius: 5px;
   padding: 30px;
@@ -121,3 +121,18 @@ export const FooterContent = styled("div")`
     margin-right: 5px;
   }
 `;
+
+interface TabHeaderButtonProps {
+  active: boolean;
+}
+
+export const TabHeaderButton = styled("button")<TabHeaderButtonProps>(
+  ({ active }) => ({
+    background: "none",
+    border: "none",
+    borderBottom: active ? "3px solid #d43939" : "3px solid white",
+    ":hover": {
+      cursor: "pointer",
+    },
+  })
+);

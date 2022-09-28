@@ -1,8 +1,10 @@
-import { Avatar, Button, Drawer } from "@mui/material";
+import { useState } from "react";
+import { Avatar, Drawer } from "@mui/material";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import PhoneIphoneIcon from "@mui/icons-material/PhoneIphone";
 import EmailIcon from "@mui/icons-material/Email";
+import Button from "../../../../components/Button";
 import {
   ActionButtonContainer,
   DrawerContentContainer,
@@ -22,6 +24,7 @@ import {
   TabContentColumnContainer,
   TabContentContainer,
   TabContentLabel,
+  TabHeaderButton,
 } from "./styled";
 import { Soldier } from "../../../../shared/interfaces/Soldier";
 
@@ -32,12 +35,21 @@ interface CustomDrawerProps {
   unsetSelectedData: Function;
 }
 
+const TabConstants = {
+  DETAILS: "Details",
+  POST: "Post",
+  FINAL_CALL: "Final Call",
+  NOTES: "Notes",
+};
+
 const CustomDrawer: React.FC<CustomDrawerProps> = ({
   selectedSoldier,
   isVisible,
   toggle,
   unsetSelectedData,
 }) => {
+  const [tabSelected, setTabSelected] = useState("");
+  const { DETAILS, POST, FINAL_CALL, NOTES } = TabConstants;
   return (
     <Drawer
       anchor="right"
@@ -66,31 +78,59 @@ const CustomDrawer: React.FC<CustomDrawerProps> = ({
           </SoldierCard>
           <ActionButtonContainer>
             <Button
-              variant="contained"
-              size="small"
+              variant="outlined"
+              type="neutral"
               startIcon={<PhoneIphoneIcon />}
+              size="small"
             >
               Send Text
             </Button>
-            <Button variant="contained" size="small" startIcon={<EmailIcon />}>
+            &nbsp;
+            <Button
+              variant="outlined"
+              type="neutral"
+              startIcon={<EmailIcon />}
+              size="small"
+            >
               Send Email
             </Button>
           </ActionButtonContainer>
           <NavigationButtonContainer>
-            <Button variant="contained" size="small">
+            <Button variant="outlined" type="neutral" size="small">
               <KeyboardArrowLeftIcon />
             </Button>
-            <Button variant="contained" size="small">
+            &nbsp;
+            <Button variant="outlined" type="neutral" size="small">
               <KeyboardArrowRightIcon />
             </Button>
           </NavigationButtonContainer>
         </InlineRow>
         <TabHeaderContainer>
           <InlineRow>
-            <TabHeader>Details</TabHeader>
-            <TabHeader>Post</TabHeader>
-            <TabHeader>Final Call</TabHeader>
-            <TabHeader>Notes</TabHeader>
+            <TabHeaderButton
+              onClick={() => setTabSelected(DETAILS)}
+              active={!tabSelected || tabSelected === DETAILS}
+            >
+              <TabHeader>Details</TabHeader>
+            </TabHeaderButton>
+            <TabHeaderButton
+              onClick={() => setTabSelected(POST)}
+              active={tabSelected === POST}
+            >
+              <TabHeader>Post</TabHeader>
+            </TabHeaderButton>
+            <TabHeaderButton
+              onClick={() => setTabSelected(FINAL_CALL)}
+              active={tabSelected === FINAL_CALL}
+            >
+              <TabHeader>Final Call</TabHeader>
+            </TabHeaderButton>
+            <TabHeaderButton
+              onClick={() => setTabSelected(NOTES)}
+              active={tabSelected === NOTES}
+            >
+              <TabHeader>Notes</TabHeader>
+            </TabHeaderButton>
           </InlineRow>
         </TabHeaderContainer>
         <TabContentContainer>
@@ -134,14 +174,18 @@ const CustomDrawer: React.FC<CustomDrawerProps> = ({
               </InfoCell>
             </TabContentColumn>
           </TabContentColumnContainer>
-
-          <FooterContentContainer>
-            <FooterContent>
-              <Button variant="contained">Save</Button>
-              <Button variant="contained">Cancel</Button>
-            </FooterContent>
-          </FooterContentContainer>
         </TabContentContainer>
+        <FooterContentContainer>
+          <FooterContent>
+            <Button type="neutral" variant="outlined" size="medium">
+              Save
+            </Button>
+            &nbsp;
+            <Button type="danger" variant="outlined" size="medium">
+              Cancel
+            </Button>
+          </FooterContent>
+        </FooterContentContainer>
       </DrawerContentContainer>
     </Drawer>
   );

@@ -34,7 +34,7 @@ const DataGrid: React.FC<DataGridProps> = ({
 }: DataGridProps) => (
   <>
     <GridHeaderContainer>
-      <Checkbox />
+      <Checkbox sx={{ "&:hover": { backgroundColor: "#F4F1F1" } }} />
       <GridTitleContainer>
         <GridHeader>
           {headers.map((header) => (
@@ -49,7 +49,7 @@ const DataGrid: React.FC<DataGridProps> = ({
       {data.map((d, index) => (
         <>
           <GridRow key={d.email}>
-            <Checkbox />
+            <Checkbox sx={{ "&:hover": { backgroundColor: "#F4F1F1" } }} />
             <GridCell
               clickable={true}
               onClick={() => {

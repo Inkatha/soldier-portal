@@ -1,7 +1,10 @@
 import { useState } from "react";
 import TextField from "@mui/material/TextField";
 import SearchIcon from "@mui/icons-material/Search";
-import { Button } from "@mui/material";
+import PhoneIphoneIcon from "@mui/icons-material/PhoneIphone";
+import EmailIcon from "@mui/icons-material/Email";
+
+import Button from "../../components/Button";
 
 import {
   DashboardContainer,
@@ -12,7 +15,7 @@ import {
 } from "./styled";
 
 import DataGrid from "../../components/DataGrid";
-import CustomDrawer from "./components/Drawer";
+import Drawer from "./components/Drawer";
 
 const Dashboard = () => {
   const [drawerToggle, setDrawerToggle] = useState(false);
@@ -82,8 +85,23 @@ const Dashboard = () => {
         <InlineRow>
           <DashboardSubtitle>Total Soldiers: 204</DashboardSubtitle>
           <div>
-            <Button variant="contained">Send Text</Button>
-            <Button variant="contained">Send Email</Button>
+            <Button
+              variant="outlined"
+              type="neutral"
+              startIcon={<PhoneIphoneIcon />}
+              size="small"
+            >
+              Send Text
+            </Button>
+            &nbsp;
+            <Button
+              variant="outlined"
+              type="neutral"
+              startIcon={<EmailIcon />}
+              size="small"
+            >
+              Send Email
+            </Button>
           </div>
         </InlineRow>
         <SearchBarContainer>
@@ -101,7 +119,7 @@ const Dashboard = () => {
           setSelectedData={setSelectedSoldier}
         />
       </DashboardContainer>
-      <CustomDrawer
+      <Drawer
         selectedSoldier={selectedSoldier}
         isVisible={drawerToggle}
         toggle={setDrawerToggle}
