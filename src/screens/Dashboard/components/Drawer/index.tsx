@@ -8,7 +8,6 @@ import Button from "../../../../components/Button";
 import {
   ActionButtonContainer,
   DrawerContentContainer,
-  InfoCell,
   InlineRow,
   FooterContentContainer,
   FooterContent,
@@ -20,13 +19,13 @@ import {
   StyledPosition,
   TabHeader,
   TabHeaderContainer,
-  TabContentColumn,
-  TabContentColumnContainer,
-  TabContentContainer,
-  TabContentLabel,
   TabHeaderButton,
 } from "./styled";
 import { Soldier } from "../../../../shared/interfaces/Soldier";
+import DetailsTab from "./DetailsTab";
+import PostTab from "./PostTab";
+import FinalCallTab from "./FinalCallTab";
+import NotesTab from "./NotesTab";
 
 interface CustomDrawerProps {
   selectedSoldier: Soldier | null;
@@ -48,8 +47,8 @@ const CustomDrawer: React.FC<CustomDrawerProps> = ({
   toggle,
   unsetSelectedData,
 }) => {
-  const [tabSelected, setTabSelected] = useState("");
   const { DETAILS, POST, FINAL_CALL, NOTES } = TabConstants;
+  const [tabSelected, setTabSelected] = useState(DETAILS);
   return (
     <Drawer
       anchor="right"
@@ -133,48 +132,10 @@ const CustomDrawer: React.FC<CustomDrawerProps> = ({
             </TabHeaderButton>
           </InlineRow>
         </TabHeaderContainer>
-        <TabContentContainer>
-          <TabContentColumnContainer>
-            <TabContentColumn>
-              <InfoCell>
-                <TabContentLabel>Email</TabContentLabel>
-                <div>malik.inkatha@gmail.com</div>
-              </InfoCell>
-              <InfoCell>
-                <TabContentLabel>Phone Number</TabContentLabel>
-                <div>702-325-4359</div>
-              </InfoCell>
-              <InfoCell>
-                <TabContentLabel>Address</TabContentLabel>
-                <div>185 E 34th St</div>
-                <div>Steger, Illinois 60475</div>
-              </InfoCell>
-              <InfoCell>
-                <TabContentLabel>Marital Status</TabContentLabel>
-                <div>Married</div>
-              </InfoCell>
-            </TabContentColumn>
-
-            <TabContentColumn>
-              <InfoCell>
-                <TabContentLabel>Education Level</TabContentLabel>
-                <div>Bachelors</div>
-              </InfoCell>
-              <InfoCell>
-                <TabContentLabel>Subject Studied</TabContentLabel>
-                <div>Computer Science</div>
-              </InfoCell>
-              <InfoCell>
-                <TabContentLabel>School Attended</TabContentLabel>
-                <div>Aurora University</div>
-              </InfoCell>
-              <InfoCell>
-                <TabContentLabel>Is Active</TabContentLabel>
-                <div>Yes</div>
-              </InfoCell>
-            </TabContentColumn>
-          </TabContentColumnContainer>
-        </TabContentContainer>
+        {tabSelected === DETAILS && <DetailsTab />}
+        {tabSelected === POST && <PostTab />}
+        {tabSelected === FINAL_CALL && <FinalCallTab />}
+        {tabSelected === NOTES && <NotesTab />}
         <FooterContentContainer>
           <FooterContent>
             <Button type="neutral" variant="outlined" size="medium">
